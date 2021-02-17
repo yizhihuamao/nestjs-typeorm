@@ -1,9 +1,17 @@
 import { Module } from '@nestjs/common';
-
+import { ConfigModule } from '@nestjs/config';
 import { CatsModule } from './cats/cats.module';
 import { CoreModule } from './core/core.module';
 
 @Module({
-  imports: [CoreModule, CatsModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      envFilePath: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
+    }),
+    CoreModule,
+    CatsModule
+  ],
 })
 export class AppModule { }

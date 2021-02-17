@@ -1,6 +1,6 @@
 import {
   Controller, Get, Post, Body, Put, Param, Delete, Query,
-  HttpStatus, UseFilters, ForbiddenException, ParseIntPipe, UseGuards
+  HttpStatus, UseFilters, ParseIntPipe, UseGuards
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
