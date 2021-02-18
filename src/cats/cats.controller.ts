@@ -1,6 +1,6 @@
 import {
   Controller, Get, Post, Body, Put, Param, Delete, Query,
-  HttpStatus, UseFilters, ParseIntPipe, UseGuards
+  HttpStatus, UseFilters, ParseIntPipe, UseGuards, Logger
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
@@ -11,6 +11,7 @@ import { RolesGuard } from '../common/guards/roles.guard';
 @Controller('cats')
 @UseGuards(RolesGuard)
 export class CatsController {
+  private readonly logger = new Logger(CatsController.name);
   constructor(private readonly catsService: CatsService) { }
 
   @Post()
@@ -26,6 +27,7 @@ export class CatsController {
   @Get(':id')
   async findOne(
     @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number) {
+    this.logger.log('Doing something...');
     return this.catsService.findOne(id);
   }
 
