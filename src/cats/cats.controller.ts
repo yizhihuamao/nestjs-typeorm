@@ -1,6 +1,6 @@
 import {
   Controller, Get, Post, Body, Put, Param, Delete, Query,
-  HttpStatus, UseFilters, ParseIntPipe, UseGuards, Inject
+  HttpStatus, UseFilters, ParseIntPipe, UseGuards, Inject, ParseArrayPipe
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
@@ -40,8 +40,11 @@ export class CatsController {
     return this.catsService.update(+id, updateCatDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.catsService.remove(+id);
+  @Delete()
+  remove(
+    @Query('ids', new ParseArrayPipe({ items: Number, separator: ',' }))
+    ids: number[],
+  ) {
+    return 'remove returns a user';
   }
 }
