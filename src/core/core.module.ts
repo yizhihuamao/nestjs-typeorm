@@ -5,8 +5,8 @@ import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 
 @Module({
   providers: [
-    { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
     { provide: APP_INTERCEPTOR, useClass: TimeoutInterceptor },
+    { provide: APP_INTERCEPTOR, useClass: TransformInterceptor },
   ],
 })
 export class CoreModule { }
