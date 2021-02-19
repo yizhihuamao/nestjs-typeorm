@@ -10,9 +10,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             username: process.env.TYPEORM_USERNAME,
             password: process.env.TYPEORM_PASSWORD,
             database: process.env.TYPEORM_DATABASE,
-            // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
-            synchronize: false,
             autoLoadEntities: true,
+            // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+            synchronize: process.env.TYPEORM_SYNCHRONIZE === "true",
         })
     ]
 })
