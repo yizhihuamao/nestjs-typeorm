@@ -4,6 +4,7 @@ import { CatsModule } from './cats/cats.module';
 import { CoreModule } from './core/core.module';
 import { WinstonModule } from 'nest-winston';
 import { ConnectionModule } from './connection/connection.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ConnectionModule } from './connection/connection.module';
     WinstonModule.forRoot({}),
     ConnectionModule,
     CatsModule,
+    UsersModule,
   ],
 })
 export class AppModule { }
