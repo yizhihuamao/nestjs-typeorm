@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CatsModule } from './cats/cats.module';
 import { CoreModule } from './core/core.module';
 import { WinstonModule } from 'nest-winston';
+import { ConnectionModule } from './connection/connection.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { WinstonModule } from 'nest-winston';
     }),
     CoreModule,
     WinstonModule.forRoot({}),
+    ConnectionModule,
     CatsModule,
   ],
 })
