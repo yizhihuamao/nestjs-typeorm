@@ -1,18 +1,22 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: process.env.TYPEORM_HOST,
-            port: parseInt(process.env.TYPEORM_PORT, 10),
-            username: process.env.TYPEORM_USERNAME,
-            password: process.env.TYPEORM_PASSWORD,
-            database: process.env.TYPEORM_DATABASE,
-            autoLoadEntities: true,
-            // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
-            synchronize: process.env.TYPEORM_SYNCHRONIZE === "true",
+        TypeOrmModule.forRootAsync({
+            useFactory: (configService: ConfigService) => ({
+                type: 'postgres',
+                host: configService.get('TYPEORM_HOST'),
+                port: +configService.get<number>('TYPEORM_PORT'),
+                username: configService.get('TYPEORM_USERNAME'),
+                password: configService.get('TYPEORM_PASSWORD'),
+                database: configService.get('TYPEORM_DATABASE'),
+                autoLoadEntities: true,
+                // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+                synchronize: configService.get('TYPEORM_SYNCHRONIZE') === "true",
+            }),
+            inject: [ConfigService],
         })
     ]
 })
