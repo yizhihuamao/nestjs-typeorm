@@ -10,6 +10,10 @@ export class CreateDogDto {
     @IsEnum(DogShops)
     dogShops: DogShops;
 
+    /**
+    * A dog's age
+    * @example 123
+    */
     age?: number;
 
     breed?: string;

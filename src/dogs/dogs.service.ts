@@ -20,7 +20,7 @@ export class DogsService {
     return `This action updates a #${id} dog`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} dog`;
+  remove(name: string) {
+    return `This action removes a #${name} dog`;
   }
 }
