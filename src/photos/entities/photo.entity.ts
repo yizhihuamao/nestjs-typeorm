@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from "typeorm";
+import { PhotoMetadata } from "./photo-meta.entity";
 
 @Entity()
 export class Photo {
@@ -20,4 +21,9 @@ export class Photo {
 
     @Column()
     isPublished: boolean;
+
+    @OneToOne(type => PhotoMetadata, photoMetadata => photoMetadata.photo, {
+        cascade: true,
+    })
+    metadata: PhotoMetadata;
 }

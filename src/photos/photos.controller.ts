@@ -3,6 +3,7 @@ import { PhotosService } from './photos.service';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { UpdatePhotoDto } from './dto/update-photo.dto';
 import { Photo } from './entities/photo.entity';
+import { PhotoMetadata } from './entities/photo-meta.entity';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('photos api（照片）')
@@ -15,23 +16,26 @@ export class PhotosController {
     return this.photosService.create(createPhotoDto);
   }
 
+  // 未完成
   @Get()
   findAll(): Promise<Photo[]> {
     return this.photosService.findAll();
   }
 
-  @Get(':id')
+  /* @Get(':id')
   findOne(@Param('id') id: string): Promise<Photo> {
     return this.photosService.findOne(+id);
-  }
+  } */
 
-  @Put(':id')
+  // 未完成
+  /* @Put(':id')
   update(@Param('id') id: string, @Body() updateConsumerDto: UpdatePhotoDto): Promise<Photo> {
     return this.photosService.update(+id, updateConsumerDto);
-  }
+  } */
 
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<Photo> {
-    return this.photosService.remove(+id);
-  }
+  // 未完成
+  /*   @Delete(':id')
+    remove(@Param('id') id: string): Promise<Photo> {
+      return this.photosService.remove(+id);
+    } */
 }

@@ -2,28 +2,41 @@ import { Injectable } from '@nestjs/common';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 import { UpdatePhotoDto } from './dto/update-photo.dto';
 import { Photo } from './entities/photo.entity';
+import { PhotoMetadata } from './entities/photo-meta.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class PhotosService {
   constructor(
-    @InjectRepository(Photo)
-    private readonly photosRepository: Repository<Photo>,
+    @InjectRepository(Photo) private readonly photosRepository: Repository<Photo>,
+    @InjectRepository(PhotoMetadata) private readonly photoMetaRepository: Repository<PhotoMetadata>,
   ) { }
 
-  create(createPhotoDto: CreatePhotoDto) {
+  async create(createPhotoDto: CreatePhotoDto) {
+    // 实际中要用事务
+    // 或者 cascade: true ? (已经配置)，只保存一次
+
+    const metadata = new PhotoMetadata();
+    metadata.height = createPhotoDto.height;
+    metadata.width = createPhotoDto.width;
+    metadata.compressed = createPhotoDto.compressed;
+    metadata.comment = createPhotoDto.comment;
+    metadata.orientation = createPhotoDto.orientation;
+
     const photo = new Photo();
     photo.name = createPhotoDto.name;
     photo.description = createPhotoDto.description;
     photo.filename = createPhotoDto.filename;
     photo.views = createPhotoDto.views;
     photo.isPublished = createPhotoDto.isPublished;
+
+    photo.metadata = metadata
     return this.photosRepository.save(photo);
   }
 
   findAll() {
-    return this.photosRepository.find();
+    return this.photosRepository.find({ relations: ["metadata"] })
   }
 
   findOne(id: number) {
