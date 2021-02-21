@@ -21,18 +21,25 @@ export class ConsumersService {
   }
 
   findAll() {
-    return `This action returns all consumers`;
+    return this.usersRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} consumer`;
+    return this.usersRepository.findOne(id);
   }
 
-  update(id: number, updateConsumerDto: UpdateConsumerDto) {
-    return `This action updates a #${id} consumer`;
+  async update(id: number, updateConsumerDto: UpdateConsumerDto) {
+    // 这段代码只是演示，实际要使用事务
+    const user = await this.findOne(id);
+    user.firstName = updateConsumerDto.firstName;
+    user.lastName = updateConsumerDto.lastName;
+    user.age = updateConsumerDto.age;
+    return this.usersRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} consumer`;
+  async remove(id: number) {
+    // 这段代码只是演示，实际要使用事务
+    const user = await this.findOne(id);
+    return this.usersRepository.remove(user);
   }
 }
