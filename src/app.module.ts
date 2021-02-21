@@ -5,6 +5,7 @@ import { CoreModule } from './core/core.module';
 import { WinstonModule } from 'nest-winston';
 import { ConnectionModule } from './connection/connection.module';
 import { UsersModule } from './users/users.module';
+import { DogsModule } from './dogs/dogs.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
     ConnectionModule,
     CatsModule,
     UsersModule,
+    DogsModule,
   ],
 })
 export class AppModule { }
