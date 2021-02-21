@@ -17,8 +17,8 @@ import { DogsModule } from './dogs/dogs.module';
     CoreModule,
     WinstonModule.forRoot({}),
     ConnectionModule,
-    CatsModule,
-    UsersModule,
+    // CatsModule,
+    // UsersModule,
     DogsModule,
   ],
 })

@@ -2,10 +2,12 @@ import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common'
 import { DogsService } from './dogs.service';
 import { CreateDogDto } from './dto/create-dog.dto';
 import { UpdateDogDto } from './dto/update-dog.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('狗的api')
 @Controller('dogs')
 export class DogsController {
-  constructor(private readonly dogsService: DogsService) {}
+  constructor(private readonly dogsService: DogsService) { }
 
   @Post()
   create(@Body() createDogDto: CreateDogDto) {

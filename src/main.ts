@@ -14,7 +14,7 @@ async function bootstrap() {
     .setTitle('猫 example')
     .setDescription('The 猫 API description')
     .setVersion('1.0')
-    .addTag('猫')
+    .addTag('总的描述')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
