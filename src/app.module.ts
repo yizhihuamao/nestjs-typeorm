@@ -6,6 +6,7 @@ import { WinstonModule } from 'nest-winston';
 import { ConnectionModule } from './connection/connection.module';
 import { UsersModule } from './users/users.module';
 import { DogsModule } from './dogs/dogs.module';
+import { ConsumersModule } from './consumers/consumers.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { DogsModule } from './dogs/dogs.module';
     ConnectionModule,
     // CatsModule,
     // UsersModule,
-    DogsModule,
+    // DogsModule,
+    ConsumersModule,
   ],
 })
 export class AppModule { }
