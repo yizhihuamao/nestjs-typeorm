@@ -32,7 +32,7 @@ export class PhotosController {
   }
 
   @Get('photoAlbum')
-  findAllphotoAlbum() {
+  findAllphotoAlbum(): Promise<Photo[]> {
     return this.photosService.findAllphotoAlbum();
   }
 
