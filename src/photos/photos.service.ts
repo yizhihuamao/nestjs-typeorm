@@ -39,6 +39,10 @@ export class PhotosService {
     return this.photosRepository.find({ relations: ["metadata"] })
   }
 
+  findAllMetadata() {
+    return this.photoMetaRepository.find({ relations: ["photo"] })
+  }
+
   findOne(id: number) {
     return this.photosRepository.findOne(id);
   }

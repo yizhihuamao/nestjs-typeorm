@@ -16,10 +16,14 @@ export class PhotosController {
     return this.photosService.create(createPhotoDto);
   }
 
-  // 未完成
   @Get()
   findAll(): Promise<Photo[]> {
     return this.photosService.findAll();
+  }
+
+  @Get('metadata')
+  findAllMetadata(): Promise<PhotoMetadata[]> {
+    return this.photosService.findAllMetadata();
   }
 
   /* @Get(':id')
