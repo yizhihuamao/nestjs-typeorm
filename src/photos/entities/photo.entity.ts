@@ -1,4 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, ManyToMany } from "typeorm";
+import {
+    Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne, ManyToMany,
+    CreateDateColumn, UpdateDateColumn, DeleteDateColumn
+} from "typeorm";
 import { PhotoMetadata } from "./photo-meta.entity";
 import { Author } from "./author.entity";
 import { Album } from "./album.entity";
@@ -28,6 +31,15 @@ export class Photo {
         cascade: true,
     })
     metadata: PhotoMetadata;
+
+    @CreateDateColumn()
+    created_at: Date
+
+    @UpdateDateColumn()
+    updated_at: Date;
+
+    @DeleteDateColumn()
+    delete_at: Date;
 
     @ManyToOne(type => Author, author => author.photos)
     author: Author;

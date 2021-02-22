@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsBoolean, IsEnum } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsEnum, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum Orientation {
@@ -15,11 +15,14 @@ export class CreateMetaDataDto {
 
     @ApiProperty({ enum: Orientation })
     @IsEnum(Orientation)
-    orientation: Orientation;
+    @IsOptional()
+    orientation?: Orientation;
 
     @IsBoolean()
-    compressed: boolean;
+    @IsOptional()
+    compressed?: boolean;
 
     @IsString()
-    comment: string;
+    @IsOptional()
+    comment?: string;
 }

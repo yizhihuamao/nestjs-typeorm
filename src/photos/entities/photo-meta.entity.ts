@@ -13,13 +13,13 @@ export class PhotoMetadata {
     @Column()
     width: number;
 
-    @Column()
+    @Column({ nullable: true })
     orientation: string;
 
-    @Column()
+    @Column({ nullable: true })
     compressed: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     comment: string;
 
     @OneToOne(type => Photo, photo => photo.metadata)
