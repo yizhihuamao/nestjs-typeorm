@@ -1,35 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePhotoDto } from './dto/create-photo.dto';
-import { UpdatePhotoDto } from './dto/update-photo.dto';
+import { CreatePhotoMetadataDto } from './dto/create-photo-metadata.dto';
 import { Photo } from './entities/photo.entity';
 import { PhotoMetadata } from './entities/photo-meta.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreatePhotoAlbumsDto } from './dto/create-photo-albums.dto';
+import { Album } from './entities/album.entity';
 
 @Injectable()
 export class PhotosService {
   constructor(
     @InjectRepository(Photo) private readonly photosRepository: Repository<Photo>,
     @InjectRepository(PhotoMetadata) private readonly photoMetaRepository: Repository<PhotoMetadata>,
+    @InjectRepository(Album) private readonly albumMetaRepository: Repository<Album>,
   ) { }
 
-  async create(createPhotoDto: CreatePhotoDto) {
+  async create(createPhotoMetadataDto: CreatePhotoMetadataDto) {
     // 实际中要用事务
     // 或者 cascade: true ? (已经配置)，只保存一次
 
     const metadata = new PhotoMetadata();
-    metadata.height = createPhotoDto.height;
-    metadata.width = createPhotoDto.width;
-    metadata.compressed = createPhotoDto.compressed;
-    metadata.comment = createPhotoDto.comment;
-    metadata.orientation = createPhotoDto.orientation;
+    metadata.height = createPhotoMetadataDto.height;
+    metadata.width = createPhotoMetadataDto.width;
+    metadata.compressed = createPhotoMetadataDto.compressed;
+    metadata.comment = createPhotoMetadataDto.comment;
+    metadata.orientation = createPhotoMetadataDto.orientation;
 
     const photo = new Photo();
-    photo.name = createPhotoDto.name;
-    photo.description = createPhotoDto.description;
-    photo.filename = createPhotoDto.filename;
-    photo.views = createPhotoDto.views;
-    photo.isPublished = createPhotoDto.isPublished;
+    photo.name = createPhotoMetadataDto.name;
+    photo.description = createPhotoMetadataDto.description;
+    photo.filename = createPhotoMetadataDto.filename;
+    photo.views = createPhotoMetadataDto.views;
+    photo.isPublished = createPhotoMetadataDto.isPublished;
 
     photo.metadata = metadata
     return this.photosRepository.save(photo);
@@ -43,7 +45,32 @@ export class PhotosService {
     return this.photoMetaRepository.find({ relations: ["photo"] })
   }
 
-  findOne(id: number) {
+  async createPhotoAlbum(createPhotoAlbumsDto: CreatePhotoAlbumsDto) {
+
+    const albums = []
+
+    for (const photoAlbum of createPhotoAlbumsDto.albums) {
+      const album = new Album();
+      album.name = photoAlbum.name
+      albums.push(album)
+      await this.albumMetaRepository.save(album)
+    }
+
+    let photo = new Photo();
+    photo.name = createPhotoAlbumsDto.name;
+    photo.description = createPhotoAlbumsDto.description;
+    photo.filename = createPhotoAlbumsDto.filename;
+    photo.views = createPhotoAlbumsDto.views;
+    photo.isPublished = createPhotoAlbumsDto.isPublished;
+    photo.albums = albums;
+    return this.photosRepository.save(photo);
+  }
+
+  findAllphotoAlbum() {
+    return this.photosRepository.find({ relations: ["albums"] })
+  }
+
+  /* findOne(id: number) {
     return this.photosRepository.findOne(id);
   }
 
@@ -62,5 +89,5 @@ export class PhotosService {
     // 这段代码只是演示，实际要使用事务
     const user = await this.findOne(id);
     return this.photosRepository.remove(user);
-  }
+  } */
 }

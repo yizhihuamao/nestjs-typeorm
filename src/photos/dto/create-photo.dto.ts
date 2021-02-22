@@ -1,10 +1,4 @@
-import { IsString, IsNumber, IsBoolean, IsEnum } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
-
-export enum Orientation {
-    Portrait = 'Portrait',
-    Horizonal = 'Horizonal'
-}
+import { IsString, IsNumber, IsBoolean } from 'class-validator';
 
 export class CreatePhotoDto {
     @IsString()
@@ -21,21 +15,4 @@ export class CreatePhotoDto {
 
     @IsBoolean()
     isPublished: boolean;
-
-    //meta
-    @IsNumber()
-    height: number;
-
-    @IsNumber()
-    width: number;
-
-    @ApiProperty({ enum: Orientation })
-    @IsEnum(Orientation)
-    orientation: Orientation;
-
-    @IsBoolean()
-    compressed: boolean;
-
-    @IsString()
-    comment: string;
 }

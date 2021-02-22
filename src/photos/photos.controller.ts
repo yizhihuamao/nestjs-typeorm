@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { PhotosService } from './photos.service';
-import { CreatePhotoDto } from './dto/create-photo.dto';
-import { UpdatePhotoDto } from './dto/update-photo.dto';
+import { CreatePhotoMetadataDto } from './dto/create-photo-metadata.dto';
+import { CreatePhotoAlbumsDto } from './dto/create-photo-albums.dto';
 import { Photo } from './entities/photo.entity';
 import { PhotoMetadata } from './entities/photo-meta.entity';
 import { ApiTags } from '@nestjs/swagger';
@@ -12,8 +12,8 @@ export class PhotosController {
   constructor(private readonly photosService: PhotosService) { }
 
   @Post()
-  create(@Body() createPhotoDto: CreatePhotoDto): Promise<Photo> {
-    return this.photosService.create(createPhotoDto);
+  create(@Body() createPhotoMetadataDto: CreatePhotoMetadataDto) {
+    return this.photosService.create(createPhotoMetadataDto);
   }
 
   @Get()
@@ -24,6 +24,16 @@ export class PhotosController {
   @Get('metadata')
   findAllMetadata(): Promise<PhotoMetadata[]> {
     return this.photosService.findAllMetadata();
+  }
+
+  @Post('photoAlbum')
+  createPhotoAlbum(@Body() createPhotoAlbumsDto: CreatePhotoAlbumsDto) {
+    return this.photosService.createPhotoAlbum(createPhotoAlbumsDto);
+  }
+
+  @Get('photoAlbum')
+  findAllphotoAlbum() {
+    return this.photosService.findAllphotoAlbum();
   }
 
   /* @Get(':id')
