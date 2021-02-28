@@ -10,6 +10,7 @@ import { ConsumersModule } from './consumers/consumers.module';
 import { PhotosModule } from './photos/photos.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RabbitsModule } from './rabbits/rabbits.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,11 +23,12 @@ import { RabbitsModule } from './rabbits/rabbits.module';
     WinstonModule.forRoot({}),
     ConnectionModule,
     // CatsModule,
-    // UsersModule,
+    UsersModule,
+    AuthModule,
     // DogsModule,
-    ConsumersModule,
-    PhotosModule,
-    CategoriesModule,
+    // ConsumersModule,
+    // PhotosModule,
+    // CategoriesModule,
     // RabbitsModule,
   ],
 })
