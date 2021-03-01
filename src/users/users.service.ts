@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -13,8 +13,7 @@ export class UsersService {
 
   create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
-    user.firstName = createUserDto.firstName;
-    user.lastName = createUserDto.lastName;
+    user.name = createUserDto.name;
 
     return this.usersRepository.save(user);
   }
@@ -23,8 +22,10 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne(id);
+  findOne(id: string): Promise<any> {
+    return this.usersRepository.createQueryBuilder("user")
+      .where("user.id = :id", { id })
+      .getOne()
   }
 
   async remove(id: string): Promise<void> {

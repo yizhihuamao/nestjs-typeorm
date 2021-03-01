@@ -11,8 +11,10 @@ import { PhotosModule } from './photos/photos.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RabbitsModule } from './rabbits/rabbits.module';
 import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
