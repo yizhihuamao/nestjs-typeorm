@@ -8,8 +8,8 @@ export class User {
     @Column({ unique: true })
     username: string;
 
-    @Column()
-    password: string;
+    @Column({ select: false })
+    password?: string;
 
     @Column({ nullable: true })
     age: string;
