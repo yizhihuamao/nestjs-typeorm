@@ -22,9 +22,9 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findById(id: string): Promise<any> {
+  findById(userId: string): Promise<any> {
     return this.usersRepository.createQueryBuilder("user")
-      .where("user.id = :id", { id })
+      .where("user.userId = :userId", { userId })
       .getOne()
   }
 
