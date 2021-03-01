@@ -13,8 +13,8 @@ export class UsersService {
 
   create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
-    user.name = createUserDto.name;
-
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
     return this.usersRepository.save(user);
   }
 
@@ -22,9 +22,15 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<any> {
+  findById(id: string): Promise<any> {
     return this.usersRepository.createQueryBuilder("user")
       .where("user.id = :id", { id })
+      .getOne()
+  }
+
+  findOne(username: string): Promise<any> {
+    return this.usersRepository.createQueryBuilder("user")
+      .where("user.username = :username", { username })
       .getOne()
   }
 
