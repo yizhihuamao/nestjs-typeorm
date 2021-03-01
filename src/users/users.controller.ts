@@ -4,7 +4,7 @@ import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('user api (权限验证)')
+@ApiTags('user api')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
