@@ -35,6 +35,7 @@ export class UsersService {
   findOne(username: string): Promise<any> {
     return this.usersRepository.createQueryBuilder("user")
       .where("user.username = :username", { username })
+      .select(['user.userId', 'user.username', 'user.password'])
       .getOne()
   }
 
