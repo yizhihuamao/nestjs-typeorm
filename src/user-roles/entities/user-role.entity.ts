@@ -10,6 +10,7 @@ export class UserRole {
     @Column({
         type: "enum",
         enum: Role,
+        unique: true
     })
     role: Role
 

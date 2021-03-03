@@ -15,8 +15,6 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth('JWT')
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
@@ -32,6 +30,8 @@ export class UsersController {
     return this.usersService.findOne(username);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT')
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.usersService.remove(id);
