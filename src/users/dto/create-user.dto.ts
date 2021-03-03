@@ -1,6 +1,4 @@
-import { IsString, IsEnum, IsOptional } from 'class-validator';
-import { Role } from "../../common/guards/role.enum";
-import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateUserDto {
     @IsString()
@@ -9,8 +7,7 @@ export class CreateUserDto {
     @IsString()
     password: string;
 
-    @ApiProperty({ enum: Role, isArray: true })
-    @IsEnum(Role, { each: true })
     @IsOptional()
-    roles: Role[];
+    @IsNumber({}, { each: true })
+    roleIds: number[];
 }
