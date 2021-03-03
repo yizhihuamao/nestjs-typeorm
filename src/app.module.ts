@@ -14,6 +14,9 @@ import { RabbitsModule } from './rabbits/rabbits.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { UserRolesModule } from './user-roles/user-roles.module';
+import { WritersModule } from './writers/writers.module';
+import { ArticlesModule } from './articles/articles.module';
+import { CaslModule } from './casl/casl.module';
 
 @Module({
   controllers: [AppController],
@@ -30,6 +33,9 @@ import { UserRolesModule } from './user-roles/user-roles.module';
     UsersModule,
     AuthModule,
     UserRolesModule,
+    WritersModule,
+    ArticlesModule,
+    CaslModule,
     // DogsModule,
     // ConsumersModule,
     // PhotosModule,
