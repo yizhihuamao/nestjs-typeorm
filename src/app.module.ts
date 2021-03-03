@@ -12,6 +12,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { RabbitsModule } from './rabbits/rabbits.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
+import { UserRolesModule } from './user-roles/user-roles.module';
 
 @Module({
   controllers: [AppController],
@@ -27,6 +28,7 @@ import { AppController } from './app.controller';
     // CatsModule,
     UsersModule,
     AuthModule,
+    UserRolesModule,
     // DogsModule,
     // ConsumersModule,
     // PhotosModule,

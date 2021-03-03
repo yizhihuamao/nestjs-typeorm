@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags('user api')
 @Controller('users')
@@ -14,6 +15,8 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT')
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
