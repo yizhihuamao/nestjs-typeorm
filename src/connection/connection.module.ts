@@ -21,8 +21,9 @@ import { MongooseModule } from '@nestjs/mongoose';
         }),
         MongooseModule.forRootAsync({
             useFactory: async (configService: ConfigService) => ({
-                uri: 'mongodb://localhost:27017/my_nest_database',
+                uri: 'mongodb://localhost:27017',
                 useNewUrlParser: true,
+                dbName: 'my_nest_database',
                 // but not ideal for large production deployments, because index builds can cause performance degradation.
                 autoIndex: true,
                 useUnifiedTopology: true,
