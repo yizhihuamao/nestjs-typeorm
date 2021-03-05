@@ -17,6 +17,8 @@ import { UserRolesModule } from './user-roles/user-roles.module';
 import { WritersModule } from './writers/writers.module';
 import { ArticlesModule } from './articles/articles.module';
 import { CaslModule } from './casl/casl.module';
+import { GiraffesModule } from './giraffes/giraffes.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   controllers: [AppController],
@@ -36,6 +38,8 @@ import { CaslModule } from './casl/casl.module';
     WritersModule,
     ArticlesModule,
     CaslModule,
+    GiraffesModule,
+    EventsModule,
     // DogsModule,
     // ConsumersModule,
     // PhotosModule,
