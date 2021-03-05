@@ -2,7 +2,7 @@ import { Prop, SchemaFactory, Schema } from "@nestjs/mongoose";
 
 @Schema()
 export class ClickedLinkEvent {
-    kind: string;
+    event: string;
     time: Date;
 
     @Prop({ type: String, required: true })

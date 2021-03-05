@@ -2,7 +2,7 @@ import { Prop, SchemaFactory, Schema } from "@nestjs/mongoose";
 
 @Schema()
 export class SignUpEvent {
-    kind: string;
+    event: string;
     time: Date;
 
     @Prop({ type: String, required: true })
