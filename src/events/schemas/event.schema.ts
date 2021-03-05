@@ -1,12 +1,13 @@
 import { Prop, SchemaFactory, Schema } from "@nestjs/mongoose";
 import { ClickedLinkEvent } from "./click-link-event.schema";
 import { SignUpEvent } from "./sign-up-event.schema";
+import { Document } from 'mongoose';
 
 @Schema({ discriminatorKey: 'kind' })
-export class Event {
+export class Event extends Document {
     @Prop({
         type: String,
-        required: true,
+        // required: true,
         enum: [ClickedLinkEvent.name, SignUpEvent.name],
     })
     kind: string;

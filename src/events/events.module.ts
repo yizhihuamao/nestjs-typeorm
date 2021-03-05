@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { EventsController } from './events.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Event, EventSchema } from './schemas/event.schema';
 import { ClickedLinkEvent, ClickedLinkEventSchema } from './schemas/click-link-event.schema';
-import { EventSchema } from './schemas/event.schema';
 import { SignUpEvent, SignUpEventSchema } from './schemas/sign-up-event.schema';
 
 @Module({
