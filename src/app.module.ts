@@ -17,8 +17,8 @@ import { UserRolesModule } from './user-roles/user-roles.module';
 import { WritersModule } from './writers/writers.module';
 import { ArticlesModule } from './articles/articles.module';
 import { CaslModule } from './casl/casl.module';
-import { GiraffesModule } from './giraffes/giraffes.module';
-import { EventsModule } from './events/events.module';
+// import { GiraffesModule } from './giraffes/giraffes.module';
+// import { EventsModule } from './events/events.module';
 
 @Module({
   controllers: [AppController],
@@ -26,7 +26,9 @@ import { EventsModule } from './events/events.module';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      envFilePath: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env',
+      envFilePath: process.env.NODE_ENV
+        ? `.env.${process.env.NODE_ENV}`
+        : '.env',
     }),
     CoreModule,
     WinstonModule.forRoot({}),
@@ -38,8 +40,8 @@ import { EventsModule } from './events/events.module';
     WritersModule,
     ArticlesModule,
     CaslModule,
-    GiraffesModule,
-    EventsModule,
+    // GiraffesModule,
+    // EventsModule,
     // DogsModule,
     // ConsumersModule,
     // PhotosModule,
@@ -47,4 +49,4 @@ import { EventsModule } from './events/events.module';
     // RabbitsModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
