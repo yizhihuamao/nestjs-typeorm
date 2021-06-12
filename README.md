@@ -11,4 +11,5 @@
 - 生产：ormconfig.json && .env
 ### 文档
 - API：http://127.0.0.1:3006/api/ ，yarn dev即可和后端服务一起查看
-
+- typeorm：https://docs.nestjs.com/techniques/database
+- nestjs db：https://docs.nestjs.com/techniques/database
